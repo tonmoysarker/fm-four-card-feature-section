@@ -1,71 +1,204 @@
 /* Imports */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap");
 
-/* Global */
+/* Variables */
 :root {
-  /* primary colors */
+  /* font colors */
+  --color-primary: hsl(234, 12%, 34%);
+  --color-secondary: hsl(229, 6%, 66%);
+
+  /* bg colors */
+  --bg-primary: hsl(0, 0%, 98%);
+  --bg-secondary: #ffffff;
+
+  /* accent colors */
   --red: hsl(0, 78%, 62%);
   --cyan: hsl(180, 62%, 55%);
   --orange: hsl(34, 97%, 64%);
   --blue: hsl(212, 86%, 64%);
 
-  /* neutrall colors */
-  --very-dark-blue: hsl(234, 12%, 34%);
-  --greyish-blue: hsl(229, 6%, 66%);
-  --very-light-grey: hsl(0, 0%, 98%);
+  /* fluid type */
+  /* @link https://utopia.fyi/type/calculator?c=375,15,1.2,1440,16,1.333,4,1,&s=0.75|0.5,1.5|2|3|4,s-l&g=s,l,xl,12 */
+
+  --font-step--1: clamp(0.7502rem, 0.7922rem + -0.0467vw, 0.7813rem);
+  --font-step-0: clamp(0.9375rem, 0.9155rem + 0.0939vw, 1rem);
+  --font-step-1: clamp(1.125rem, 1.0518rem + 0.3125vw, 1.333rem);
+  --font-step-2: clamp(1.35rem, 1.1997rem + 0.6413vw, 1.7769rem);
+  --font-step-3: clamp(1.62rem, 1.3564rem + 1.1246vw, 2.3686rem);
+  --font-step-4: clamp(1.944rem, 1.5168rem + 1.8228vw, 3.1573rem);
+
+  /* fluid space  */
+  /* @link https://utopia.fyi/space/calculator?c=375,15,1.2,1440,16,1.333,4,1,&s=0.75|0.5,1.5|2|3|4,s-l&g=s,l,xl,12 */
+
+  /* One-up pairs */
+  --space-2xs-xs: clamp(0.5rem, 0.412rem + 0.3756vw, 0.75rem);
+  --space-xs-s: clamp(0.6875rem, 0.5775rem + 0.4695vw, 1rem);
+  --space-s-m: clamp(0.9375rem, 0.7394rem + 0.8451vw, 1.5rem);
+  --space-m-l: clamp(1.4375rem, 1.2394rem + 0.8451vw, 2rem);
+  --space-l-xl: clamp(1.875rem, 1.4789rem + 1.6901vw, 3rem);
+  --space-xl-2xl: clamp(2.8125rem, 2.3944rem + 1.784vw, 4rem);
+
+  /* Custom pairs */
+  --space-s-l: clamp(0.9375rem, 0.5634rem + 1.5962vw, 2rem);
+
+  --font-base: "Poppins";
+  --font-light: 200;
+  --font-normal: 400;
+  --font-bold: 600;
+
+  --gutter: var(--space-s-m);
+  --border-radius: var(--font-step-1);
+  --transition-base: 250ms ease;
+  --tracking-s: -0.075ch;
 }
 
-/* Compositions */
+/* Global Css */
+body {
+  width: 100%;
+  background-color: var(--bg-primary);
+  color: var(--color-secondary);
+  font-family: var(--font-base), sans-serif;
+  font-size: var(--font-step-0);
+  display: grid;
+  place-content: center;
+}
 
+h1 {
+  font-size: var(--font-step-3);
+}
+
+h2 {
+  font-size: var(--font-step-2);
+}
+
+h3 {
+  font-size: var(--font-step-1);
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: var(--tracking-s);
+  color: var(--color-primary);
+  max-width: 30ch;
+}
+
+strong {
+  display: block;
+  margin-top: var(--space-xs-s);
+}
+
+p,
+li {
+  max-width: 65ch;
+}
+
+[role="list"] {
+  padding: 0;
+}
+
+/* Composition */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--grid-placement, auto-fill),
+    minmax(var(--grid-min-item-size, 16rem), 1fr)
+  );
+  gap: var(--gutter, var(--space-s-l));
+}
+
+.auto-flex {
+  display: flex;
+  gap: var(--gutter, var(--space-s-l));
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
 /* Utilities */
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+
 .wrapper {
-  width: 90vh;
-  width: clamp(16rem, 90vh, 76rem);
-  margin: 0 auto;
-  padding: 0 var(--gutter, 1rem);
+  border: 1px solid red;
+  width: 90vw;
+  width: clamp(16rem, 90vw, 76rem);
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  position: relative;
 }
 
-.poppins-extralight {
-  font-family: "Poppins", serif;
-  font-weight: 200;
-  font-style: normal;
+.region {
+  padding-top: var(--region-space, var(--space-l-xl));
+  padding-bottom: var(--region-space, var(--space-l-xl));
 }
 
-.poppins-regular {
-  font-family: "Poppins", serif;
-  font-weight: 400;
-  font-style: normal;
+.sr-only {
+  /* for accessibility */
+  position: absolute; /* Remove it from the document flow */
+  width: 1px; /* Reduce size to the minimum */
+  height: 1px; /* Same as width */
+  margin: 0; /* No margin */
+  padding: 0; /* No padding */
+  overflow: hidden; /* Hide overflow */
+  clip: rect(0, 0, 0, 0); /* Clip the element */
+  white-space: nowrap; /* Prevent line breaks */
+  border: 0; /* No border */
 }
 
-.poppins-semibold {
-  font-family: "Poppins", serif;
-  font-weight: 600;
-  font-style: normal;
+.text-light {
+  font-weight: var(--font-light);
 }
 
-.poppins-extralight-italic {
-  font-family: "Poppins", serif;
-  font-weight: 200;
-  font-style: italic;
+.text-normal {
+  font-weight: var(--font-normal);
 }
 
-.poppins-regular-italic {
-  font-family: "Poppins", serif;
-  font-weight: 400;
-  font-style: italic;
+.text-bold {
+  font-weight: var(--font-bold);
 }
 
-.poppins-semibold-italic {
-  font-family: "Poppins", serif;
-  font-weight: 600;
-  font-style: italic;
+.text-left {
+  text-align: left;
 }
 
-/* Blocks */
-.attribution {
-  font-size: 11px;
+.text-center {
   text-align: center;
 }
-.attribution a {
-  color: hsl(228, 45%, 44%);
+
+.text-right {
+  text-align: right;
 }
+
+.margin-l-r-a {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.margin-t-a {
+  margin-top: auto;
+}
+
+.margin-b-a {
+  margin-bottom: auto;
+}
+
+.margin-l-a {
+  margin-left: auto;
+}
+
+.margin-r-a {
+  margin-right: auto;
+}
+/* Blocks  */
