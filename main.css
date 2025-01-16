@@ -151,8 +151,8 @@ img {
 }
 
 .region {
-  padding-top: var(--region-space, var(--space-l-xl));
-  padding-bottom: var(--region-space, var(--space-l-xl));
+  padding-top: var(--region-space, var(--space-m-l));
+  padding-bottom: var(--region-space, var(--space-m-l));
 }
 
 .sr-only {
